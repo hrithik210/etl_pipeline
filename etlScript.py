@@ -34,10 +34,6 @@ def transform(rows):
     df.drop_duplicates()
     df = df.loc[df['price'] > 0  , ['id' , 'airline' , 'departure' , 'arrival' , 'price']]
 
-    
-    df['departure'] = pd.to_datetime(df['departure'])
-    df['arrival'] = pd.to_datetime(df['arrival'])
-
     df['flight_duration'] = (df['arrival'] - df['departure']).dt.total_seconds() / 3600 #in hours
     df['airline'] = df['airline'].replace('Airline 1' , 'AirIndia')
 
@@ -49,10 +45,12 @@ def load(transformed_data):
     cursor = connection.cursor()
 
     for data in transformed_data:
+        departure_str = data['departure'].strftime('%Y-%m-%d %H:%M:%S')
+        arrival_str = data['arrival'].strftime('%Y-%m-%d %H:%M:%S')
         cursor.execute(
             'INSERT INTO flight_data_transformed(airline , departure , arrival , price , flight_duration)'
             'VALUES(%s , %s, %s , %s , %s )',
-            (data['airline'] , data['departure'] , data['arrival'] , data['price'] , data['flight_duration'])
+            (data['airline'] , departure_str , arrival_str , data['price'] , data['flight_duration'])
         )
     
     connection.commit()
@@ -62,3 +60,7 @@ def run_etl():
     rows = extract()
     transformed_data = transform(rows)
     load(transformed_data)
+
+
+if __name__ == "__main__":
+    run_etl()
