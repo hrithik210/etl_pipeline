@@ -70,6 +70,26 @@ def load(transformed_data):
     try:
         with mysql.connector.connect(**destination_db_config) as connection:
             cursor = connection.cursor()
+
+            check_table = '''
+                select count(*) from information_schema.tables where table_schema = %s AND table_name = %s
+                '''
+            cursor.execute(check_table , (destination_db_config['database'] , 'flight_data_transformed'))
+            table_exists = cursor.fetchone()[0]
+            if not table_exists:
+                create_table = '''
+                    create table flight_data_tranformed(
+                        id int auto_increment primary key,
+                        airline varchar(255),
+                        departure datetime,
+                        arrival datetime,
+                        price float,
+                        flight_duration float
+                    )
+                '''
+                cursor.execute(create_table)
+                logging.info(f"new table created : flight_data_tranformed")
+            
             insert_query = '''
                     INSERT INTO flight_data_transformed(airline , departure , arrival , price , flight_duration)
                     VALUES(%s , %s, %s , %s , %s )
