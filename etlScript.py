@@ -42,7 +42,7 @@ def transform(rows):
     try:
         df = pd.DataFrame(rows , columns=['id' , 'airline' , 'departure' , 'arrival' , 'price'])
         df.dropna(inplace=True)
-        df.drop_duplicates()
+        df = df.drop_duplicates()
         df = df.loc[df['price'] > 0  , ['id' , 'airline' , 'departure' , 'arrival' , 'price']]
 
         #type conversion if not already in dt
