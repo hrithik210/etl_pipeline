@@ -78,7 +78,7 @@ def load(transformed_data):
             table_exists = cursor.fetchone()[0]
             if not table_exists:
                 create_table = '''
-                    create table flight_data_tranformed(
+                    create table flight_data_transformed(
                         id int auto_increment primary key,
                         airline varchar(255),
                         departure datetime,
