@@ -22,6 +22,16 @@
   - `departure` (datetime)
   - `arrival` (datetime)
   - `price` (float)
+- example `command`.
+  ```
+  create table flight_data(
+  id int auto_increment primary key,
+  airline varchar(255),
+  departure datetime,
+  arrival datetime,
+  price float
+  )
+  ```
 - Insert sample data into the `flight_data` table for testing.
 -for example-
 ```
