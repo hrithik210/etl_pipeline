@@ -27,7 +27,7 @@
 ### 4. Install Dependencies
 - Run the following command to install required Python packages:
   ```
-  pip install -r requirements.txt
+  pip install -r requirement.txt
   ```
 
 ### 5. Run the Pipeline
