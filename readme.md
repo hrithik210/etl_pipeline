@@ -23,15 +23,16 @@
   - `arrival` (datetime)
   - `price` (float)
 - Insert sample data into the `flight_data` table for testing.
-for example-
-''' INSERT INTO flight_data (id, airline, departure, arrival, price)
+-for example-
+```
+  INSERT INTO flight_data (id, airline, departure, arrival, price)
    VALUES
-   (1, 'Delta Airlines', '2025-01-17 08:30:00', '2025-01-17 12:45:00', 250.50),
+   (1, 'Airline 1', '2025-01-17 08:30:00', '2025-01-17 12:45:00', 250.50),
    (2, 'American Airlines', '2025-01-18 10:15:00', '2025-01-18 14:20:00', 325.00),
    (3, 'United Airlines', '2025-01-19 09:00:00', '2025-01-19 13:10:00', 289.99),
    (4, 'Southwest Airlines', '2025-01-20 07:45:00', '2025-01-20 12:00:00', 200.75),
    (5, 'JetBlue', '2025-01-21 06:00:00', '2025-01-21 10:30:00', 180.00);
-  '''
+  ```
 
 ### 4. Install Dependencies
 - Run the following command to install required Python packages:
